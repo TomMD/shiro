@@ -148,9 +148,8 @@ public class TextConfigurationRealm extends SimpleAccountRealm {
         if (roleDefs == null || roleDefs.isEmpty()) {
             return;
         }
-        for (Map.Entry<String,String> entry : roleDefs.entrySet()) {
-            String rolename = entry.getKey();
-            String value = entry.getValue();
+        for (String rolename : roleDefs.keySet()) {
+            String value = roleDefs.get(rolename);
 
             SimpleRole role = getRole(rolename);
             if (role == null) {
@@ -178,9 +177,9 @@ public class TextConfigurationRealm extends SimpleAccountRealm {
         if (userDefs == null || userDefs.isEmpty()) {
             return;
         }
-        for (Map.Entry<String,String> entry : userDefs.entrySet()) {
-            String username = entry.getKey();
-            String value = entry.getValue();
+        for (String username : userDefs.keySet()) {
+
+            String value = userDefs.get(username);
 
             String[] passwordAndRolesArray = StringUtils.split(value);
 
