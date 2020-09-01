@@ -185,9 +185,11 @@ public abstract class ShiroWebModule extends ShiroModule {
 
         // now we find only the PathMatchingFilter and configure bindings
         // non PathMatchingFilter, can be loaded with the default provider via the class name
-        for (Key<? extends Filter> key : filterToPathToConfig.keySet()) {
+        for (Map.Entry<Key<? extends Filter>, Map<String,String>> entry : filterToPathToConfig.entrySet()) {
+            Key<? extends Filter> key = entry.getKey();
+            Map<String,String> val = entry.getValue();
             if (PathMatchingFilter.class.isAssignableFrom(key.getTypeLiteral().getRawType())) {
-                bindPathMatchingFilter(castToPathMatching(key), filterToPathToConfig.get(key));
+                bindPathMatchingFilter(castToPathMatching(key), val);
             }
             else {
                 bind(key);
